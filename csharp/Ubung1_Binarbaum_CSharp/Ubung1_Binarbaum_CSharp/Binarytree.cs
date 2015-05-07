@@ -15,8 +15,8 @@ namespace Ubung1_Binarbaum_CSharp
         // @param value: the value of the root
         public BinaryTree(int value)
         {
-            Contract.Requires(value >= 0);
             Contract.Invariant(root != null);
+            Contract.Requires(value >= 0);
             root = new Node(value);
         }
 
@@ -197,9 +197,7 @@ namespace Ubung1_Binarbaum_CSharp
         public bool remove(int value)
         {
             Contract.Requires(value >= 0);
-            bool recursion = this.removeRecursion(root, value, null, false); ;
-
-            return recursion;
+            return this.removeRecursion(root, value, null, false);
         }
 
         // Int this method it compares the values with each other. 
@@ -211,12 +209,10 @@ namespace Ubung1_Binarbaum_CSharp
         // @return if the deletion was successful then it will return true
         private bool removeRecursion(Node node, int value, Node parent, bool leftFromParent)
         {
-            bool removeSuccessful = false;
-
             if (node == null)
             {
                 Contract.Requires(node == null);
-                removeSuccessful = false;
+                return false;
             }
             Contract.Requires(node.getLeft() == null);
             Contract.Requires(node.getRight() == null);
@@ -279,7 +275,7 @@ namespace Ubung1_Binarbaum_CSharp
                     }
                 }
                 removeRecursion(root, value, null, false);
-                removeSuccessful = true;
+                return true;
             }
 
             if ((value.CompareTo(node.getData())) < 0)
@@ -308,7 +304,7 @@ namespace Ubung1_Binarbaum_CSharp
                     return removeRecursion(node.getRight(), value, node, false);
                 }
             }
-            return removeSuccessful;
+            return false;
         }
 
         // In this method you look whether it is right from the parent or left. If left is true then it will set the node left from the parent.
@@ -421,293 +417,6 @@ namespace Ubung1_Binarbaum_CSharp
         {
             Contract.Ensures(Contract.Result<String>() != null);
             return root.toString();
-        }
-    }
-    public class Node
-    {
-        private int value;
-        private Node left = null;
-        private Node right = null;
-        private Node parent = null;
-
-        // Constructor of the class "Node"
-        // @param value: the value of the new node
-        public Node(int value)
-        {
-            Contract.Ensures(value >= 0);
-            this.setData(value);
-        }
-
-        // @param value: to set the value of a node
-        private void setData(int value)
-        {
-            Contract.Requires(value >= 0);
-            this.value = value;
-        }
-
-        // @param node: to set the node left of another node/a parent
-        public void setLeft(Node node)
-        {
-            Contract.Requires(left != null);
-            this.left = node;
-        }
-
-        // @param node: to set the node right of another node/a parent
-        public void setRight(Node node)
-        {
-            Contract.Requires(right != null);
-            this.right = node;
-        }
-
-        // @param node: to set the parent
-        public void setParent(Node node)
-        {
-            Contract.Requires(parent != null);
-            this.parent = node;
-        }
-
-        // @return the parent of a node
-        public Node getParent()
-        {
-            Contract.Ensures(Contract.Result<Node>() != null);
-            return parent;
-        }
-
-        // @return the value of a node
-        public int getData()
-        {
-            Contract.Ensures(Contract.Result<int>() >= 0);
-            return value;
-        }
-
-        // @return the left node from the parent node
-        public Node getLeft()
-        {
-            Contract.Ensures(Contract.Result<Node>() != left);
-            return left;
-        }
-
-        // @return the right node from the parent node
-        public Node getRight()
-        {
-            Contract.Ensures(Contract.Result<Node>() != right);
-            return right;
-        }
-
-        public String toString()
-        {
-            Contract.Ensures(Contract.Result<String>() != null);
-            return this.ToString();
-        }
-    }
-    //------------------------------------------------Exercise 2----------------------------------------------
-    public abstract class Problem<Solution>
-    {
-        // A abstract get-method
-        // @return from the interface Solution
-        public abstract Solution getSolution();
-    }
-    public abstract class DivisibleProblem<Solution> : Problem<Solution>
-    {
-        protected bool directlySolvable = false;
-        protected BinaryTree tree = null;
-
-        // @param node: the current node, from where you look
-        public abstract void checkSolvability(Node node);
-
-        // @param node: the current node, from where you search the highest value or form where you sum up the values
-        protected abstract void getHighestAndSum(Node node);
-
-        // @param value: the value for the new root
-        public void setBinaryTree(int value)
-        {
-            Contract.Requires(value >= 0);
-            tree = new BinaryTree(value);
-        }
-
-        // @return the binarytree
-        public BinaryTree getBinaryTree()
-        {
-            Contract.Ensures(Contract.Result<BinaryTree>() != null);
-            return tree;
-        }
-
-        // In this method you check first if you can solve the problem directly. If not, then it will divide the problem to reach the solution.
-        public virtual void computeSolution()
-        {
-            Contract.Requires(tree.getRoot() != null);
-            checkSolvability(tree.getRoot());
-            if (!(directlySolvable))
-            {
-                getHighestAndSum(tree.getRoot());
-            }
-        }
-    }
-    public class SumProblem : DivisibleProblem<SumSolution>
-    {
-        protected SumSolution solution;
-
-        // Constructor of the class "SumProblem"
-        public SumProblem()
-        {
-            Contract.Requires()
-            solution = new SumSolution();
-        }
-
-        // This method has been overridden. Here we can solve the problem directly.
-        // @param node: at this node, you check the right node and the left node. If it is "null", then you can solve it directly.
-        public override void checkSolvability(Node node)
-        {
-            int directSum = 0;
-
-            if (node.getRight() == null && node.getLeft() == null)
-            {
-                directlySolvable = true;
-                directSum = node.getData();
-                solution.setSum(node.getData());
-            }
-        }
-
-        // A overridden method.
-        // @return the solution of the sum problem
-        public override SumSolution getSolution()
-        {
-            return solution;
-        }
-
-        // In this mehtod you sum up the values of the binarytree.
-        // @param node: at this node, you sum up the other nodes
-        // @return the solution of the problem sum
-        protected int getSumRecursion(Node node)
-        {
-            int sum = 0;
-            if (node != null)
-            {
-                sum += node.getData() + getSumRecursion(node.getLeft()) + getSumRecursion(node.getRight());
-            }
-            return sum;
-        }
-
-        // Here you set the solution of the problem.
-        // @param node: at this node, you sum up the other nodes
-        protected override void getHighestAndSum(Node node)
-        {
-            solution.setSum(this.getSumRecursion(node));
-        }
-    }
-
-    public class MaxProblem : DivisibleProblem<MaxSolution>
-    {
-        protected MaxSolution solution;
-
-        // Constructor of the class "MaxProblem"
-        public MaxProblem()
-        {
-            solution = new MaxSolution();
-        }
-
-        // This method has been overridden. Here we can solve the problem directly.
-        // @param node: at this node, you check the right node and the left node. If it is "null", then you can solve it directly.
-        public override void checkSolvability(Node node)
-        {
-            int directHighest = 0;
-
-            if (node.getRight() == null && node.getLeft() == null)
-            {
-                directlySolvable = true;
-                directHighest = node.getData();
-                solution.setMaximum(directHighest);
-            }
-        }
-
-        // Here you set the solution of the problem.
-        // @param node: at this node, you search the highest node
-        protected override void getHighestAndSum(Node node)
-        {
-            while (node.getRight() != null)
-            {
-                node = node.getRight();
-            }
-            solution.setMaximum(node.getData());
-        }
-
-        // A overridden method.
-        // @return the solution of the highest problem
-        public override MaxSolution getSolution()
-        {
-            return solution;
-        }
-
-    }
-    public class MaxSolution
-    {
-        protected int max;
-
-        // @return the highest value in the binarytree
-        public int getMaximum()
-        {
-            return max;
-        }
-
-        // A overridden method.
-        // @return the solution of the sum problem
-        protected internal void setMaximum(int max)
-        {
-            this.max = max;
-        }
-
-    }
-
-    public class SumSolution
-    {
-        protected int sum;
-
-        // @return the solution of the sum
-        public int getSum()
-        {
-            return sum;
-        }
-
-        // @param set the solution of the sum
-        protected internal void setSum(int sum)
-        {
-            this.sum = sum;
-        }
-    }
-    public class ProblemSolver
-    {
-        static void Main(string[] args)
-        {
-            MaxProblem max = new MaxProblem();
-            max.setBinaryTree(10);
-            max.getBinaryTree().insert(12);
-            max.computeSolution();
-            Console.WriteLine("MaxSolution:" + max.getSolution().getMaximum());
-
-            SumProblem sum = new SumProblem();
-            sum.setBinaryTree(4);
-            sum.getBinaryTree().insert(2);
-            sum.getBinaryTree().insert(3);
-            sum.getBinaryTree().insert(6);
-
-            sum.computeSolution();
-            Console.WriteLine("SumSolution:" + sum.getSolution().getSum());
-
-            BinaryTree b = new BinaryTree(8);
-            BinaryTree b2 = new BinaryTree(2);
-            for (int i = 0; i <= 15; i++)
-            {
-                b.insert(i);
-            }
-            Contract.Assert(b.getHighestValue() == 15);
-            Contract.Assert(b.getSmallestValue() == 0);
-            Contract.Assert(Equals(b.toString(), b2.toString()));
-
-            Console.WriteLine(b.preOrder());
-            b.remove(10);
-            Console.WriteLine(b.preOrder());
-
-            Console.ReadKey();
         }
     }
 }
