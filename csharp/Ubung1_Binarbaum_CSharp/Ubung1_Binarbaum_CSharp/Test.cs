@@ -41,6 +41,8 @@ namespace Ubung1_Binarbaum_CSharp
 
             Console.WriteLine("Tree: " + binarytree.preOrder());
             Console.WriteLine("Second tree: " + binarytreeTwo.preOrder());
+            Console.WriteLine("Smallest Value: " + binarytree.getSmallestNode(binarytree.getRoot()).getData());
+            Console.WriteLine("Highest Value: " + binarytree.getHighestNode(binarytree.getRoot()).getData());
 
             try
             {
