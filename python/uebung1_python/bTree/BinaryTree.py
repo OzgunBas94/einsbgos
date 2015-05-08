@@ -185,3 +185,25 @@ class BinaryTree:
     def getRoot(self):
         return self.__root
     
+    '''
+    This method invokes a recursion to return an inOrder String of the numbers in the tree.
+    '''
+    def inOrder(self):
+        assert type(self.__root) is Node or self.__root is None
+        if type(self.__root) is Node or self.__root is None:
+            return self.inOrderRecursion(self.__root)
+    
+    '''
+    This creates an inOrder String of the numbers is the tree.
+    '''
+    def inOrderRecursion(self, node):
+        assert type(node) is Node or node is None
+        res = ""
+        if node is None:
+            res = "There are no nodes"
+        if node.getLeft() is not None:
+            res = self.inOrderRecursion(node.getLeft())
+        res += str(node.getData()) + " "
+        if node.getRight() is not None:
+            res+= self.inOrderRecursion(node.getRight())
+        return res

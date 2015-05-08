@@ -19,6 +19,10 @@ def main():
     btree.insert(24)
     print(btree.has(24))
     
+    btree.insert(24)
+    
+    print(btree.inOrder())
+    
 
 if __name__ == '__main__':
     res = main()
