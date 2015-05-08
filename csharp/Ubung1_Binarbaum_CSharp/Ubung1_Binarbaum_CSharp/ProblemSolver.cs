@@ -10,7 +10,7 @@ namespace Ubung1_Binarbaum_CSharp
         public abstract class Problem<Solution>
         {
             // A abstract get-method
-            // @return from the interface Solution
+            // @return from the class Solution
             public abstract Solution getSolution();
         }
         public abstract class DivisibleProblem<Solution> : Problem<Solution>
