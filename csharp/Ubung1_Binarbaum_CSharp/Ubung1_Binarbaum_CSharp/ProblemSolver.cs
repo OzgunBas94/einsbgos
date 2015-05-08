@@ -10,7 +10,6 @@ namespace Ubung1_Binarbaum_CSharp
         public abstract class Problem<Solution>
         {
             // A abstract get-method
-            // @return from the class Solution
             public abstract Solution getSolution();
         }
         public abstract class DivisibleProblem<Solution> : Problem<Solution>
@@ -159,7 +158,6 @@ namespace Ubung1_Binarbaum_CSharp
                 Contract.Ensures(Contract.Result<MaxSolution>() != null);
                 return solution;
             }
-
         }
         public class MaxSolution
         {
@@ -172,7 +170,6 @@ namespace Ubung1_Binarbaum_CSharp
                 return max;
             }
 
-            // A overridden method.
             // @return the solution of the sum problem
             protected internal void setMaximum(int max)
             {
