@@ -18,13 +18,14 @@ namespace Ubung1_Binarbaum_CSharp
         // @param value: the value of the new node
         public Node(int value)
         {
-            Contract.Ensures(value >= 0);
+            Contract.Ensures(Contract.Result<int>() >= 0);
             this.setData(value);
         }
 
         // @param value: to set the value of a node
         private void setData(int value)
         {
+            Contract.Invariant(this.value >= 0);
             Contract.Requires(value >= 0);
             this.value = value;
         }
@@ -32,6 +33,7 @@ namespace Ubung1_Binarbaum_CSharp
         // @param node: to set the node left of another node/a parent
         public void setLeft(Node node)
         {
+            Contract.Invariant(this.left != null);
             Contract.Requires(left != null);
             this.left = node;
         }
@@ -39,6 +41,7 @@ namespace Ubung1_Binarbaum_CSharp
         // @param node: to set the node right of another node/a parent
         public void setRight(Node node)
         {
+            Contract.Invariant(this.right != null);
             Contract.Requires(right != null);
             this.right = node;
         }
@@ -53,28 +56,28 @@ namespace Ubung1_Binarbaum_CSharp
         // @return the parent of a node
         public Node getParent()
         {
-            Contract.Ensures(Contract.Result<Node>() != null);
+            Contract.Invariant(this.parent != null);
             return parent;
         }
 
         // @return the value of a node
         public int getData()
         {
-            Contract.Ensures(Contract.Result<int>() >= 0);
+            Contract.Invariant(this.value >= 0);
             return value;
         }
 
         // @return the left node from the parent node
         public Node getLeft()
         {
-            Contract.Ensures(Contract.Result<Node>() != left);
+            Contract.Invariant(this.left != null);
             return left;
         }
 
         // @return the right node from the parent node
         public Node getRight()
         {
-            Contract.Ensures(Contract.Result<Node>() != right);
+            Contract.Invariant(this.right != null);
             return right;
         }
 

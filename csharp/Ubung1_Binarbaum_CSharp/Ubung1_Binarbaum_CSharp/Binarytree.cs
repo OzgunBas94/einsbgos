@@ -23,7 +23,7 @@ namespace Ubung1_Binarbaum_CSharp
         // @return the root of the binarytree
         public Node getRoot()
         {
-            Contract.Ensures(Contract.Result<Node>() != null);
+            Contract.Invariant(this.root != null);
             return this.root;
         }
 
@@ -31,15 +31,17 @@ namespace Ubung1_Binarbaum_CSharp
         // @return the value of the root
         public int getSmallestValue()
         {
+            Contract.Ensures(Contract.Result<Node>() != null);
             Node node = getSmallestNode(root);
+
+            Contract.Requires(node == null);
             if (root != null)
             {
-                Contract.Ensures(Contract.Result<Node>() != null);
+                Contract.Ensures(Contract.Result<int>() >= 0);
                 return root.getData();
             }
             else
             {
-                Contract.Requires(node == null);
                 throw new Exception("Root is null!");
             }
         }
@@ -50,7 +52,7 @@ namespace Ubung1_Binarbaum_CSharp
         public Node getSmallestNode(Node node)
         {
             Contract.Requires(node != null);
-            Contract.Invariant(node.getLeft() != null);
+            Contract.Requires(node.getLeft() != null);
             if (node != null)
             {
                 while (node.getLeft() != null)
@@ -69,16 +71,17 @@ namespace Ubung1_Binarbaum_CSharp
         // @return the data of the highest node
         public int getHighestValue()
         {
+            Contract.Ensures(Contract.Result<Node>() != null);
             Node node = getHighestNode(root);
 
+            Contract.Requires(node == null);
             if (root != null)
             {
-                Contract.Ensures(Contract.Result<Node>() != null);
+                Contract.Ensures(Contract.Result<int>() >= 0);
                 return node.getData();
             }
             else
             {
-                Contract.Requires(node == null);
                 throw new Exception("Root is null!");
             }
         }
@@ -88,7 +91,7 @@ namespace Ubung1_Binarbaum_CSharp
         public Node getHighestNode(Node node)
         {
             Contract.Requires(node != null);
-            Contract.Invariant(node.getRight() != null);
+            Contract.Requires(node.getRight() != null);
             if (node != null)
             {
                 while (node.getRight() != null)
@@ -99,7 +102,6 @@ namespace Ubung1_Binarbaum_CSharp
             }
             else
             {
-                Contract.Requires(node == null);
                 throw new Exception("Root is missing!");
             }
         }
@@ -111,6 +113,7 @@ namespace Ubung1_Binarbaum_CSharp
             Contract.Requires(value >= 0);
             if (root == null)
             {
+                Contract.Invariant(root != null);
                 root = new Node(value);
             }
             else
@@ -127,22 +130,25 @@ namespace Ubung1_Binarbaum_CSharp
         private void insertRekursion(Node node, int value, Node parent)
         {
             Contract.Requires(node != null);
+            Contract.Requires(value >= 0);
             Contract.Ensures(Contract.Result<int>() >= 0);
             if (node == null)
             {
+                Contract.Ensures(Contract.Result<Node>() != null);
                 node = new Node(value);
             }
             if (this.root == null)
             {
+                Contract.Ensures(Contract.Result<Node>() != null);
                 this.root = node;
             }
             else
             {
                 if ((value.CompareTo(node.getData())) == 0)
                 {
+                    Contract.Requires(node.getRight() == null);
                     if (node.getRight() == null)
                     {
-                        Contract.Requires(node.getRight() != null);
                         Contract.Ensures(Contract.Result<Node>() != null);
                         Node newNode = new Node(value);
                         node.setRight(newNode);
@@ -150,13 +156,13 @@ namespace Ubung1_Binarbaum_CSharp
                     }
                     else
                     {
-
                         this.insertRekursion(node.getRight(), value, parent);
                     }
                 }
-
+                Contract.Requires(node.getData() < 0);
                 if ((value.CompareTo(node.getData())) < 0)
                 {
+                    Contract.Requires(node.getLeft() != null);
                     if (node.getLeft() != null)
                     {
 
@@ -174,6 +180,7 @@ namespace Ubung1_Binarbaum_CSharp
 
                 if ((value.CompareTo(node.getData())) > 0)
                 {
+                    Contract.Requires(node.getRight() != null);
                     if (node.getRight() != null)
                     {
 
@@ -194,10 +201,10 @@ namespace Ubung1_Binarbaum_CSharp
         // In this method you can remove the desired node.
         // @param value: the value of the node you want to delete
         // @return to get in the method
-        public bool remove(int value)
+        public void remove(int value)
         {
             Contract.Requires(value >= 0);
-            return this.removeRecursion(root, value, null, false);
+            this.removeRecursion(root, value, null, false);
         }
 
         // Int this method it compares the values with each other. 
@@ -207,22 +214,27 @@ namespace Ubung1_Binarbaum_CSharp
         // @param parent: the parent is a node from the current node
         // @param leftFromParent: the left node from the parent
         // @return if the deletion was successful then it will return true
-        private bool removeRecursion(Node node, int value, Node parent, bool leftFromParent)
+        private void removeRecursion(Node node, int value, Node parent, bool leftFromParent)
         {
+            Contract.Requires(node == null);
+            Contract.Requires(value >= 0);
             if (node == null)
             {
-                Contract.Requires(node == null);
-                return false;
+                throw new Exception("Node shouldn't be null!");
             }
             Contract.Requires(node.getLeft() == null);
             Contract.Requires(node.getRight() == null);
 
             if ((value.CompareTo(node.getData())) == 0)
             {
+                Contract.Requires(node.getLeft() == null);
+                Contract.Requires(node.getRight() == null);
+
                 if ((node.getLeft() == null) && (node.getRight() == null))
                 {
                     if (parent == null)
                     {
+                        Contract.Ensures(Contract.Result<Node>() == null);
                         root = null;
                     }
                     else
@@ -275,7 +287,6 @@ namespace Ubung1_Binarbaum_CSharp
                     }
                 }
                 removeRecursion(root, value, null, false);
-                return true;
             }
 
             if ((value.CompareTo(node.getData())) < 0)
@@ -284,10 +295,10 @@ namespace Ubung1_Binarbaum_CSharp
                 if (node.getLeft() == null)
                 {
                     Contract.Ensures(Contract.Result<bool>() == false);
-                    return false;
+                    throw new Exception("Node left shouldn't be null!");
                 }
                 Contract.Ensures(Contract.Result<bool>() == true);
-                return removeRecursion(node.getLeft(), value, node, true);
+                removeRecursion(node.getLeft(), value, node, true);
             }
 
             if ((value.CompareTo(node.getData())) > 0)
@@ -296,15 +307,14 @@ namespace Ubung1_Binarbaum_CSharp
                 if (node.getRight() == null)
                 {
                     Contract.Ensures(Contract.Result<bool>() == false);
-                    return false;
+                    throw new Exception("Node right shouldn't be null!");
                 }
                 else
                 {
-                    Contract.Ensures(Contract.Result<bool>() == true);
-                    return removeRecursion(node.getRight(), value, node, false);
+                    Contract.Ensures(Contract.Result<bool>() == false);
+                    removeRecursion(node.getRight(), value, node, false);
                 }
             }
-            return false;
         }
 
         // In this method you look whether it is right from the parent or left. If left is true then it will set the node left from the parent.
@@ -329,6 +339,7 @@ namespace Ubung1_Binarbaum_CSharp
         // @param value: the value it has to be search
         public Node searchNode(int value)
         {
+            Contract.Requires(value >= 0);
             return this.searchNodeRekursion(root, value);
         }
 
@@ -341,38 +352,42 @@ namespace Ubung1_Binarbaum_CSharp
         private Node searchNodeRekursion(Node node, int value)
         {
             Contract.Requires(value >= 0);
+            Contract.Requires(node != null);
+            Node returnNode = null;
+
+            Contract.Requires(value >= 0);
             if (node == null)
             {
                 Contract.Ensures(Contract.Result<Node>() == null);
-                return null;
+                throw new Exception("Node shouldn't be null!");
             }
             if (value.CompareTo(node.getData()) == 0)
             {
-                return node;
+                returnNode = node;
             }
             if (value.CompareTo(node.getData()) < 0)
             {
                 if (node.getLeft() != null)
                 {
-                    return searchNodeRekursion(node.getLeft(), value);
+                    returnNode = searchNodeRekursion(node.getLeft(), value);
                 }
                 else
                 {
-                    return null;
+                    throw new Exception("Null");
                 }
             }
             if (value.CompareTo(node.getData()) > 0)
             {
                 if (node.getRight() != null)
                 {
-                    return searchNodeRekursion(node.getRight(), value);
+                    returnNode = searchNodeRekursion(node.getRight(), value);
                 }
                 else
                 {
-                    return null;
+                    throw new Exception("null");
                 }
             }
-            return null;
+            return returnNode;
         }
 
         // This shows the output from the binarytree

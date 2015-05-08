@@ -9,40 +9,58 @@ namespace Ubung1_Binarbaum_CSharp
 {
     class Test
     {
-         static void Main(string[] args)
+        static void Main(string[] args)
         {
-            //MaxProblem max = new MaxProblem();
-            //max.setBinaryTree(10);
-            //max.getBinaryTree().insert(12);
-            //max.computeSolution();
-            //Console.WriteLine("MaxSolution:" + max.getSolution().getMaximum());
+            MaxProblem max = new MaxProblem();
+            max.setBinaryTree(10);
+            max.getBinaryTree().insert(12);
+            max.computeSolution();
+            Console.WriteLine("MaxSolution:" + max.getSolution().getMaximum());
 
-            //SumProblem sum = new SumProblem();
-            //sum.setBinaryTree(4);
-            //sum.getBinaryTree().insert(2);
-            //sum.getBinaryTree().insert(3);
-            //sum.getBinaryTree().insert(6);
+            SumProblem sum = new SumProblem();
+            sum.setBinaryTree(4);
+            sum.getBinaryTree().insert(2);
+            sum.getBinaryTree().insert(3);
+            sum.getBinaryTree().insert(6);
 
-            //sum.computeSolution();
-            //Console.WriteLine("SumSolution:" + sum.getSolution().getSum());
+            sum.computeSolution();
+            Console.WriteLine("SumSolution:" + sum.getSolution().getSum());
 
-            BinaryTree b = new BinaryTree(8);
-            BinaryTree b2 = new BinaryTree(2);
+            BinaryTree binarytree = new BinaryTree(8);
+            BinaryTree binarytreeTwo = new BinaryTree(8);
             for (int i = 0; i <= 5; i++)
             {
-                b.insert(i);
+                binarytree.insert(i);
+                binarytreeTwo.insert(i);
             }
-            b.insert(13);
-            b.insert(10);
-            b.insert(7);
+            binarytree.insert(13);
+            binarytreeTwo.insert(13);
 
-        //    Contract.Assert(b.getHighestValue() == 15);
-        //    Contract.Assert(b.getSmallestValue() == 0);
-        //    Contract.Assert(Equals(b.toString(), b2.toString()));
+            Contract.Assert(binarytree.getHighestValue() == 13);
+            Contract.Assert(Equals(binarytree.getRoot().toString(), binarytreeTwo.getRoot().toString()));
 
-            Console.WriteLine("Tree: " +b.preOrder());
-            b.remove(5);
-            Console.WriteLine("Tree: "+b.preOrder());
+            Console.WriteLine("Tree: " + binarytree.preOrder());
+            Console.WriteLine("Second tree: " + binarytreeTwo.preOrder());
+
+            try
+            {
+                binarytree.remove(3);
+            }
+            catch (Exception e)
+            {
+                e.GetBaseException();
+            }
+
+            Console.WriteLine("Tree: " + binarytree.preOrder());
+
+            try
+            {
+                Console.WriteLine("Search node: " + binarytree.searchNode(2).getData());
+            }
+            catch (Exception e)
+            {
+                e.GetBaseException();
+            }
 
             Console.ReadKey();
         }

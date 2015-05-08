@@ -28,6 +28,7 @@ namespace Ubung1_Binarbaum_CSharp
             public void setBinaryTree(int value)
             {
                 Contract.Requires(value >= 0);
+                Contract.Invariant(tree != null);
                 tree = new BinaryTree(value);
             }
 
@@ -45,6 +46,7 @@ namespace Ubung1_Binarbaum_CSharp
                 checkSolvability(tree.getRoot());
                 if (!(directlySolvable))
                 {
+                    Contract.Requires(directlySolvable == true);
                     getHighestAndSum(tree.getRoot());
                 }
             }
@@ -56,6 +58,7 @@ namespace Ubung1_Binarbaum_CSharp
             // Constructor of the class "SumProblem"
             public SumProblem()
             {
+                Contract.Invariant(solution != null);
                 solution = new SumSolution();
             }
 
@@ -64,6 +67,9 @@ namespace Ubung1_Binarbaum_CSharp
             public override void checkSolvability(Node node)
             {
                 int directSum = 0;
+                Contract.Requires(node != null);
+                Contract.Requires(node.getLeft() == null);
+                Contract.Requires(node.getRight() == null);
 
                 if (node.getRight() == null && node.getLeft() == null)
                 {
@@ -77,6 +83,7 @@ namespace Ubung1_Binarbaum_CSharp
             // @return the solution of the sum problem
             public override SumSolution getSolution()
             {
+                Contract.Ensures(Contract.Result<SumSolution>() != null);
                 return solution;
             }
 
@@ -85,11 +92,14 @@ namespace Ubung1_Binarbaum_CSharp
             // @return the solution of the problem sum
             protected int getSumRecursion(Node node)
             {
+                Contract.Requires(node != null);
                 int sum = 0;
+                Contract.Requires(node != null);
                 if (node != null)
                 {
                     sum += node.getData() + getSumRecursion(node.getLeft()) + getSumRecursion(node.getRight());
                 }
+                Contract.Ensures(Contract.Result<int>() >= 0);
                 return sum;
             }
 
@@ -97,6 +107,7 @@ namespace Ubung1_Binarbaum_CSharp
             // @param node: at this node, you sum up the other nodes
             protected override void getHighestAndSum(Node node)
             {
+                Contract.Requires(node != null);
                 solution.setSum(this.getSumRecursion(node));
             }
         }
@@ -108,6 +119,7 @@ namespace Ubung1_Binarbaum_CSharp
             // Constructor of the class "MaxProblem"
             public MaxProblem()
             {
+                Contract.Invariant(solution != null);
                 solution = new MaxSolution();
             }
 
@@ -117,6 +129,8 @@ namespace Ubung1_Binarbaum_CSharp
             {
                 int directHighest = 0;
 
+                Contract.Requires(node.getLeft() == null);
+                Contract.Requires(node.getRight() == null);
                 if (node.getRight() == null && node.getLeft() == null)
                 {
                     directlySolvable = true;
@@ -129,6 +143,8 @@ namespace Ubung1_Binarbaum_CSharp
             // @param node: at this node, you search the highest node
             protected override void getHighestAndSum(Node node)
             {
+                Contract.Requires(node != null);
+                Contract.Requires(node.getRight() != null);
                 while (node.getRight() != null)
                 {
                     node = node.getRight();
@@ -140,6 +156,7 @@ namespace Ubung1_Binarbaum_CSharp
             // @return the solution of the highest problem
             public override MaxSolution getSolution()
             {
+                Contract.Ensures(Contract.Result<MaxSolution>() != null);
                 return solution;
             }
 
@@ -151,6 +168,7 @@ namespace Ubung1_Binarbaum_CSharp
             // @return the highest value in the binarytree
             public int getMaximum()
             {
+                Contract.Ensures(Contract.Result<int>() >= 0);
                 return max;
             }
 
@@ -158,6 +176,8 @@ namespace Ubung1_Binarbaum_CSharp
             // @return the solution of the sum problem
             protected internal void setMaximum(int max)
             {
+                Contract.Invariant(this.max >= 0);
+                Contract.Requires(max >= 0);
                 this.max = max;
             }
 
@@ -170,12 +190,15 @@ namespace Ubung1_Binarbaum_CSharp
             // @return the solution of the sum
             public int getSum()
             {
+                Contract.Ensures(Contract.Result<int>() >= 0);
                 return sum;
             }
 
             // @param set the solution of the sum
             protected internal void setSum(int sum)
             {
+                Contract.Invariant(this.sum >= 0);
+                Contract.Requires(sum >= 0);
                 this.sum = sum;
             }
         }
