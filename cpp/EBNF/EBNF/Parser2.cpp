@@ -192,7 +192,7 @@ Convert Parser2::parseFactor(string input){
 				c = parseExpression(c.getInput());
 			}
 
-			if (input != "" && c.getInput()[0] == ')') {
+			if (c.getInput() != "" && c.getInput()[0] == ')') {
 				c.setInput(c.getInput().erase(0, 1));
 			}
 		}
@@ -266,7 +266,7 @@ bool Parser2::isDigitWithoutZero(char input){
 
 	if (input != '1' && input != '2' && input != '3' && input != '4'
 		&& input != '5' && input != '6' && input != '7' && input != '8'
-		&& input != '9' && input != '+' && input != '*' && input != '='
+		&& input != '9' && input != '0' && input != '+' && input != '*' && input != '='
 		&& input != '(' && input != ')') {
 		isError = true;
 	}
