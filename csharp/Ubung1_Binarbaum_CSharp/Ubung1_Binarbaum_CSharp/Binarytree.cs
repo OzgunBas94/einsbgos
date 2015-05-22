@@ -337,7 +337,7 @@ namespace Ubung1_Binarbaum_CSharp
 
         // Here you can search the desired node 
         // @param value: the value it has to be search
-        public Node searchNode(int value)
+        public bool searchNode(int value)
         {
             Contract.Requires(value >= 0);
             return this.searchNodeRekursion(root, value);
@@ -349,7 +349,7 @@ namespace Ubung1_Binarbaum_CSharp
         // @param node: the current node, from where you search
         // @param value: the value you search
         // @return the node you find
-        private Node searchNodeRekursion(Node node, int value)
+        private bool searchNodeRekursion(Node node, int value)
         {
             Contract.Requires(value >= 0);
             Contract.Requires(node != null);

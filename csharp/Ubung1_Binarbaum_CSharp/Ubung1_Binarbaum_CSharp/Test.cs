@@ -34,9 +34,10 @@ namespace Ubung1_Binarbaum_CSharp
                 binarytreeTwo.insert(i);
             }
             binarytree.insert(13);
+ //           binarytree.insert(-1);
             binarytreeTwo.insert(13);
 
-            Contract.Assert(binarytree.getHighestValue() == 13);
+            Contract.Assert(binarytree.getHighestValue() == 11);
             Contract.Assert(Equals(binarytree.getRoot().toString(), binarytreeTwo.getRoot().toString()));
 
             Console.WriteLine("Tree: " + binarytree.preOrder());
