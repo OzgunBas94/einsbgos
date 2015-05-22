@@ -16,7 +16,7 @@ def main():
     
     del(sys.argv[0])
     
-    p.parse("10+10=20=9")
+#    p.parse("(10+10)+3=20+3")
     file = open(sys.argv[1])
     for line in file:
         p.parse(line.rstrip())

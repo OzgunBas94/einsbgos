@@ -119,9 +119,7 @@ class Parser:
                         closingBrackets = closingBrackets+1
                         if closingBrackets > openingBrackets:
                             rightBrackets = False
-                if closingBrackets != openingBrackets:
-                    self.__isError = True
-                elif not rightBrackets:
+                if closingBrackets != openingBrackets or not rightBrackets:
                     self.__isError = True
                 self.__isFirst = False
             if input is not "" and input[0] is "(":
