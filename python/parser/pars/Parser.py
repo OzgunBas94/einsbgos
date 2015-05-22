@@ -31,7 +31,7 @@ class Parser:
                 else:
                     print("equation: false")
             else:
-                s = "term "
+                s = "Result: "
                 s += str(c.getNumber())
                 print(s)
         else:
@@ -143,12 +143,12 @@ class Parser:
     '''
     def __parseConstant(self, input):
         res = ""
-        c=Convert()
+        c = Convert()
         if not self.__isError:
             if input is not "" and self.__isDigitWithoutZero(input[0]):
                 res += input[0]
                 input = input[1:]
-            while input is not"" and self.__isDigit(input[0]):
+            while input is not "" and self.__isDigit(input[0]):
                 res+= input[0]
                 input = input[1:]
             num = int(res)
