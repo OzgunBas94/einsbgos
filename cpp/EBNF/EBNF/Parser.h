@@ -4,11 +4,11 @@
 
 using namespace std;
 
-class Parser2
+class Parser
 {
 public:
-	Parser2();
-	~Parser2();
+	Parser();
+	~Parser();
 
 	void parse(string input);
 

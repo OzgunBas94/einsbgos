@@ -1,4 +1,4 @@
-#include "Parser2.h"
+#include "Parser.h"
 
 /*
 This class parses a string. If the string is valid, it writes out the result.
@@ -7,7 +7,7 @@ This class parses a string. If the string is valid, it writes out the result.
 /*
 This is the constructor of the class Parser.
 */
-Parser2::Parser2()
+Parser::Parser()
 {
 	isError = false;
 	isFirst = true;
@@ -16,7 +16,7 @@ Parser2::Parser2()
 /*
 This is the destructor of the class Parser.
 */
-Parser2::~Parser2()
+Parser::~Parser()
 {
 }
 
@@ -26,7 +26,7 @@ It writes out what the result is.
 The method invokes the method parseEquation.
 Parameter: string input. It's the string that should be parsed.
 */
-void Parser2::parse(string input) {
+void Parser::parse(string input) {
 	Convert c = parseEquation(input);
 	if (!isError) {
 		if (c.isTerm){
@@ -56,7 +56,7 @@ It searches for a =-character and if it finds one, it invokes the method parseEx
 Parameters: string input, the string which should be parsed.
 Return: a Convert object which contains the needed information.
 */
-Convert Parser2::parseEquation(string input){
+Convert Parser::parseEquation(string input){
 	
 	Convert c;
 	if (!isError) {
@@ -95,7 +95,7 @@ It searches for a +-character and if it finds one, it invokes the method parseTe
 Parameters: string input, the string which should be parsed.
 Return: a Convert object which contains the needed information.
 */
-Convert Parser2::parseExpression(string input){
+Convert Parser::parseExpression(string input){
 	Convert c;
 	if (!isError) {
 		c = parseTerm(input);
@@ -124,7 +124,7 @@ It searches for a *-character and if it finds one, it invokes the method parseFa
 Parameters: string input, the string which should be parsed.
 Return: a Convert object which contains the needed information.
 */
-Convert Parser2::parseTerm(string input){
+Convert Parser::parseTerm(string input){
 	
 	Convert c;
 
@@ -156,7 +156,7 @@ If there's a bracket, the method invokes parseExpression, otherwise it invokes p
 Parameters: string input, the string which should be parsed.
 Return: a Convert object which contains the needed information.
 */
-Convert Parser2::parseFactor(string input){
+Convert Parser::parseFactor(string input){
 
 	Convert c;
 	if (!isError) {
@@ -174,10 +174,7 @@ Convert Parser2::parseFactor(string input){
 					}
 				}
 			}
-			if (closingBrackets != openingBrackets) {
-				isError = true;
-			}
-			else if (!rightBrackets) {
+			if (closingBrackets != openingBrackets || !rightBrackets) {
 				isError = true;
 			}
 			isFirst = false;
@@ -211,7 +208,7 @@ The nuber will be saved in the Convert-object.
 Parameters: string input, the string which should be parsed.
 Return: a Convert object which contains the needed information.
 */
-Convert Parser2::parseConstant(string input){
+Convert Parser::parseConstant(string input){
 	string res = "";
 	Convert c;
 	if (!isError) {
@@ -242,7 +239,7 @@ This method finds out if the input-char is a number between 0 and 9.
 Parameters: char input, the char which should be checked.
 Return: a boolean. true when it's a number between 0 and 9
 */
-bool Parser2::isDigit(char input){
+bool Parser::isDigit(char input){
 	bool res = false;
 	if (isDigitWithoutZero(input) || input == '0') {
 		res = true;
@@ -256,7 +253,7 @@ This method finds out if the input-char is a number between 1 and 9.
 Parameters: char input, the char which should be checked.
 Return: a boolean. true when it's a number between 1 and 9
 */
-bool Parser2::isDigitWithoutZero(char input){
+bool Parser::isDigitWithoutZero(char input){
 	bool res = false;
 	if (input == '1' || input == '2' || input == '3'
 		|| input == '4' || input == '5' || input == '6'

@@ -15,10 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Parser2.h">
+    <ClInclude Include="Convert.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Convert.h">
+    <ClInclude Include="Parser.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
@@ -26,10 +26,10 @@
     <ClCompile Include="Start.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Parser2.cpp">
+    <ClCompile Include="Convert.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Convert.cpp">
+    <ClCompile Include="Parser2.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

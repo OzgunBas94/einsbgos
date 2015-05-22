@@ -1,4 +1,4 @@
-#include "Parser2.h"
+#include "Parser.h"
 #include <stdio.h>
 #include <fstream>
 
@@ -10,7 +10,7 @@ If the first argument is an equation, the equation gets parsed.
 */
 void main(int argc, char *argv[]){
 
-	Parser2 p;
+	Parser p;
 	
 
 	if (argc == 2) {
