@@ -160,26 +160,7 @@ Convert Parser::parseFactor(string input){
 
 	Convert c;
 	if (!isError) {
-		if (isFirst) {
-			int openingBrackets = 0, closingBrackets = 0;
-			bool rightBrackets = true;
-			for (char &tmp : input) {
-				if (tmp == '(') {
-					openingBrackets++;
-				}
-				else if (tmp == ')') {
-					closingBrackets++;
-					if (closingBrackets > openingBrackets) {
-						rightBrackets = false;
-					}
-				}
-			}
-			if (closingBrackets != openingBrackets || !rightBrackets) {
-				isError = true;
-			}
-			isFirst = false;
-		}
-
+		
 		if (input != "" && input[0] == '('){
 
 			input.erase(0, 1);
