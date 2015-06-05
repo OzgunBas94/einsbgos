@@ -46,7 +46,8 @@ void AVL<T>::insertRemoveAVL(NodeAVL<T> * node) {
 				if (parent == this->root) {
 					this->root = node;
 				}
-				else {
+				else 
+				{
 					if (parent == parent->getParent()->getRight()) {
 						parent->getParent()->setRight(node);
 					}
@@ -62,6 +63,7 @@ void AVL<T>::insertRemoveAVL(NodeAVL<T> * node) {
 				}
 				node->setRight(parent);
 			}
+
 		}
 		else {								
 			if (getBalance(parent) == -2) {
@@ -97,7 +99,7 @@ void AVL<T>::insertRemoveAVL(NodeAVL<T> * node) {
 			}
 		}
 		node = parent;
-		parent = n->getParent();
+		parent = node->getParent();
 	}
 }
 

@@ -98,7 +98,7 @@ void Tree<T>::insert(T data){
 		Node<T>* root = new Node<T>(data);
 	}
 	else {
-		insertNodeRecursion(data, root);
+		insertRecursion(data, root);
 	}
 }
 
@@ -212,12 +212,12 @@ bool Tree<T>::search(T data){
 		return false;
 	}
 	else{
-		return root->search(data);
+		return root->searchRec(data);
 	}
 }
 
 template <class T>
-bool Node<T>::search(T data){
+bool Tree<T>::searchRec(T data){
 	if (data == this->data){
 		printf("true");
 		return true;
@@ -228,7 +228,7 @@ bool Node<T>::search(T data){
 			return false;
 		}
 		else{
-			return left->search(data);
+			return left->searchRec(data);
 		}
 	}
 	else if (data > this->data) {
@@ -237,7 +237,7 @@ bool Node<T>::search(T data){
 			return false;
 		}
 		else{
-			return right->search(data);
+			return right->searchRec(data);
 		}
 	}
 	printf("false");

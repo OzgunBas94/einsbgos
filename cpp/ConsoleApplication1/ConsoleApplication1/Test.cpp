@@ -12,9 +12,20 @@ int main() {
 	// A new object
 	Tree<int> binarytree;
 	// insert different values
-	for (int i = 1; i <= 10; i++){
+	for (int i = 0; i <= 25; i++){
 		binarytree.insert(i);
 	}
+	binarytree.insert(2);
+	binarytree.insert(5);
+
+	Tree <string> tree;
+	tree.insert("2");
+	tree.insert("3");
+	tree.insert("5");
+	tree.insert("7");
+
+	cout << "HeightString: " << binarytree.getHeight() << endl;
+	cout << endl;
 
 	//Ouput
 	binarytree.inOrder(binarytree.getRoot());
@@ -26,7 +37,7 @@ int main() {
 	binarytree.search(2);
 	cout << endl;
 	// Returns the height
-	cout << "Height " << binarytree.getHeight() << endl;
+	cout << "HeightInt: " << binarytree.getHeight() << endl;
 	cout << endl;
 
 	// A new Object

@@ -23,16 +23,13 @@ private:
 	than return the node
 	*/
 	Node<T>* getBiggestNode(Node<T>* start);
-
 	/*creates new nodes left an right*/
 	void insertRecursion(T data, Node<T>* NewNode);
-
 	// In this method you look whether it is right from the parent or left. If left is true then it will set the node left from the parent.
 	// @param parent: the parent from the node
 	// @param left: a boolean whether it is left or right
 	// @param node: the current node
 	void underParent(Node<T>* parent, bool left, Node<T>* node);
-	
 	// Int this method it compares the values with each other. 
 	// If the new value is higher than the current value, so it will look on the right of the binarytree and so on.
 	// @param node: the node where it will start to compare the value of the new node and the value of the current node.
@@ -41,17 +38,17 @@ private:
 	// @param leftFromParent: the left node from the parent
 	// @return if the deletion was successful then it will return true
 	bool removeRecursion(Node<T>* node, T data, Node<T>* parent, bool leftFromParent);
-
 	// In this method you wil get the highest node
 	// @param node: the node where it begins to search the highest node
-	public Node getHighestNode(Node node)
 	int getHeightRecursion(int currentHeight, Node<T> * node);
+	// the search recursion for the method search
+	bool searchRec(T data);
 
 public:
 	//Constructor for the class BinaryTree
 	Tree();
 	//Constructor for the class BinaryTree with value T
-	Tee(T value);
+	Tree(T value);
 	//Deconstructor
 	~Tree();
 	// @return the root of the binarytree
