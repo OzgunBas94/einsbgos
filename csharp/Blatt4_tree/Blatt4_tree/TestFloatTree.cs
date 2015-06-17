@@ -37,9 +37,22 @@ namespace Blatt4_tree
             {
                 for( int i = 0;i < num;i++ )
                 {
-                    t.insert(randomFloat(min,max));
+                    t.insert((float)random(min,max));
                 }
             }
+        }
+
+
+        // This method returns a random float.
+        //Parameters: min: the min value of the float
+        //            max: the max value of the float
+        override
+        public Object random( int min,int max ) {
+            float rf = getRandom().Next(min,max);
+            
+                rf = rf + (float)getRandom( ).NextDouble( );
+            
+            return rf;   
         }
     }
 }

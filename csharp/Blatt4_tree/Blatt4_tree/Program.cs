@@ -14,7 +14,7 @@ namespace Blatt4_tree
             Console.Out.WriteLine("Woerter mit der Laenge >= 3:");
             AVL<String> avltree = new AVL<String>();
             TestStringTree testString = new TestStringTree(avltree);
-            testString.insertRandom(1,30,20);
+            testString.insertRandom(4,38,120);
             string[ ] s = avltree.filter(x => x.Count( ) >= 3);
             foreach( string t in s )
             {
@@ -22,7 +22,6 @@ namespace Blatt4_tree
             }
             Console.Out.WriteLine();
             Console.Out.WriteLine("Woerter, die ein s enthalten:");
-            testString.insertRandom(4,30,220);
             s = avltree.filter(x => x.Contains("s"));
             foreach( string t in s )
             {
@@ -34,7 +33,7 @@ namespace Blatt4_tree
             Console.Out.WriteLine("alle negativen Zahlen:");
             Binarytree<float> btree = new Binarytree<float>( );
             TestFloatTree testFloat = new TestFloatTree(btree);
-            testFloat.insertRandom(-3957,2020,5620); // high number so there are even numbers in the tree (for the last problem). 
+            testFloat.insertRandom(-3957,2020,157);
             float[] a = btree.filter(x => x < 0);
             foreach( float b in a )
             {
@@ -49,8 +48,11 @@ namespace Blatt4_tree
                 Console.Out.WriteLine(b);
             }
             Console.Out.WriteLine( );
+
             Console.Out.WriteLine("alle geraden Zahlen");
-            //testFloat.insertRandom(-280,20,258);
+
+
+            testFloat.insertRandom(-2580,2580,25585);
             a = btree.filter(x => (x % 2) ==0);
             
             foreach( float b in a )

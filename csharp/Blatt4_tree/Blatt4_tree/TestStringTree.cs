@@ -38,10 +38,31 @@ namespace Blatt4_tree
             {
                 for( int i = 0;i < num;i++ )
                 {
-                    t.insert(randomString(min,max));
+                    t.insert((String)random(min,max));
                 }
             }
             
+        }
+
+
+        // This method returns a random string.
+        //Parameters: min: the min length of the string
+        //            max: the max length of the string
+        override
+        public Object random(int min,int max){
+            string s = "";
+            for( int i = 0;i < getRandom().Next(min,max + 1);i++ )
+            {
+                if( getRandom( ).Next(2) == 0 )
+                {
+                    s += (char)getRandom( ).Next(65,91);
+                }
+                else
+                {
+                    s += (char)getRandom( ).Next(97,123);
+                }
+            }
+            return s;
         }
     }
 }
