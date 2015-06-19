@@ -30,10 +30,6 @@ feature
 			io.new_line
 			b.filter
 
-			print("hallo")
-			io.new_line
-			print("haukd")
-
 		end--make
 
 end--class TESTING

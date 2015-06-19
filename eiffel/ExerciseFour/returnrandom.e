@@ -37,9 +37,16 @@ feature
  		random_sequence.forth
 
    		first_number:=random_sequence.real_item -- Float
+   		io.put_new_line
+   		print("Random first number: ")
+   		print(first_number)
+   		io.put_new_line
    		last_number:=random_sequence.item.to_integer_16 -- Integer
-
+   		print("Random Integer numbers: ")
+   		print(last_number)
+   		io.put_new_line
    		Result := first_number + last_number * 10
+   		io.put_new_line
  	end
 
  	--new_random_string : STRING

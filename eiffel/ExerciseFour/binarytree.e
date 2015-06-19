@@ -268,7 +268,7 @@ feature
 			if get_array.item (i).out.is_real_64 -- checks if the input is a double/float
 			then
 				io.put_new_line
-				print("THe negative Numbers of the Binarytree: ")
+				print("The negative Numbers of the Binarytree: ")
 				get_array.do_all(agent (x: G)
 				local
 					temporary: STRING
@@ -306,7 +306,7 @@ feature
 					then
 						from
 							i:=0
-						until i>arrayResult.upper
+						until i > arrayResult.upper
 						loop
 							arrayResult.force (temporary, i)
 							print(arrayResult.item(i))
