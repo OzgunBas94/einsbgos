@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lambda_Filtering_BinaryTree", "Lambda_Filtering_BinaryTree\Lambda_Filtering_BinaryTree.vcxproj", "{C1BA9352-0C9E-4CD8-97DC-3FDDFC091E92}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C1BA9352-0C9E-4CD8-97DC-3FDDFC091E92}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C1BA9352-0C9E-4CD8-97DC-3FDDFC091E92}.Debug|Win32.Build.0 = Debug|Win32
+		{C1BA9352-0C9E-4CD8-97DC-3FDDFC091E92}.Release|Win32.ActiveCfg = Release|Win32
+		{C1BA9352-0C9E-4CD8-97DC-3FDDFC091E92}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
